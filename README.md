@@ -12,6 +12,10 @@
 # Setup #
 ### 1. Kernel setup ###
 
+**HH** First of all, this tool is based on https://github.com/endplay/omniplay, which is designed to work on Ubuntu 12.04 32 bit. So before you try anything, make sure you current system matches the specification. I installed a virtual machine of Ubuntu 12.04 32 bit, and installed linux kenrel 3.5.0.
+
+
+
 ##### *Setup your OMNIPLAY_ENVIRONMENT* #####
 Run the following code one time to setup your $OMNIPLAY_DIR environment
 
@@ -24,6 +28,8 @@ Assuming that <omniplay> is the root directory where you checked out the source:
 NOTE: You may also check out ./setup.sh -h and see if you want any of the additional options.  setup.sh may be run again at any time, the changes will be seen upon logging out and logging back in.
 
 ##### *Building the kernel* #####
+
+**[HH]** (Assume you are in the correct environment now) Copy the config file in /boot to the `linux-lts-quantal-3.5.0` folder, and rename it to `.config`. use `make oldconfig` to adjust the configuration.
 
 If you're building the kernel on a fresh system, you'll need build dependencies:
 
@@ -38,6 +44,8 @@ To build (and run) the kernel, run the following
     # You'll also only need to do the 2nd compile if you had to do a make modules_install
     sudo ./compile
     sudo reboot
+    
+**[HH]** there are some errors during `./compile`. I have to disable the check of return values to force it compile extra tools. there are more errors during the compilation of extra tools, but it seems these errors do not matter.
 
 NOTE: The compile script will also build your "test" tools.
 
@@ -95,7 +103,9 @@ Note: Depends on the headers_install step from building the kernel
 
 
 ### 3. Pin tool compilation ###
-We use Intel Pin version 2.13 
+We use Intel Pin version 2.13
+
+**[HH]** Weird, I tried 2.13 but failed (got 2.13 from a friend, as Intel has removed it from the website). But 2.14 works!
 
 To build:
 
@@ -113,6 +123,8 @@ This breaks all of our Pin tools. To fix this, go into /etc/sysctl.d/10-ptrace.c
 to be:
 
     kernel.yama.ptrace_scope = 0
+    
+**[HH]** Not sure changing the file above will have immediately effect on the system. Instead, I updated `/proc/sys/kernel/yama/ptrace_scope`
 
 
 # Basics #
@@ -144,7 +156,9 @@ This is a copy-on-read cache of file data.  Cache files are named by device and 
 
 You can replay a given group with id <id> as follows:
 
-	$ ./resume /replay_logdir/rec_<id> -pthread <omniplay>/src/omniplay/eglibc-2.15/prefix/lib
+	$ ./resume /replay_logdir/rec_<id> --pthread <omniplay>/src/omniplay/eglibc-2.15/prefix/lib
+	
+**[HH]** remember to use `--pthread`, not `-pthread`
 
 Keep in mind that a recording process can not initiate a replay.  So, do this from some shell other than the recording bash shell that you started above.  Also, a recording must finish in order for you to replay it successfully.
 
@@ -156,7 +170,7 @@ A successful replay will print the message "Goodbye, cruel lamp! This replay is 
 Here we use the xword benchmark mentioned in the paper, as this benchmark takes less to reproduce and also demonstrates our ideas of predicated slices, transparent recovery, control flow divergence handling. 
 
 
-	unarchive shorcut/tutorial/xword.tar.gz
+    unarchive shorcut/tutorial/xword.tar.gz
     cd xword; make  (build it)
     cd omniplay/test
     ~/omniplay/scripts/easy_launch.sh ~/xword/placer -b ~/xword/board.tofro -w ~/xword/wordlist/newmega.txt -v 25 -m 1 -s  (record this using omniplay)
