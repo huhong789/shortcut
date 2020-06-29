@@ -190,7 +190,10 @@ Use the recording to generate a slice.
 |:---|
 |<replay_dir #> is the log folder name|
 |<ckpt #> to get this number, you need to use `shortcut/test/parseulog` to parse the `ulog.pid.xxxx` file|
-|<pid> this is the pid, which is the xxxx of file name `ulog.pid.xxxx`|
+|pid: this is the pid, which is the xxxx of file name `ulog.pid.xxxx`|
+|fix get_ckpt.py line 73: "w" --> "w+"|
+|make sure pin is in the PATH|
+	
 
 	./gen_ckpt.py <replay_dir #> <ckpt #> -taint_byterange <pid>,90,5,250  (the last arguments specifies that an input could change and in this case the changed input comes from the board file)
 	
