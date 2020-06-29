@@ -173,13 +173,16 @@ A successful replay will print the message "Goodbye, cruel lamp! This replay is 
 # Quick tutorial 
 
 
-Here we use the xword benchmark mentioned in the paper, as this benchmark takes less to reproduce and also demonstrates our ideas of predicated slices, transparent recovery, control flow divergence handling. 
+Here we use the xword benchmark mentioned in the paper, as this benchmark takes less to reproduce and also demonstrates our ideas of predicated slices, transparent recovery, control flow divergence handling.
+
+|***Hong: several files are missing. update the `Makfile` before make, specifically, change the all to `all: placer placer-part placer-server topenum detail-placer fancy-placer fill 343quad qsym hsym bottomenum tbottomenum 343phase2 343phase3 343phase3s 343phase4 tquadcheck tprune tprune2 tquadunk prune prune2 quadcheck`***|
+|:---|
 
 
     unarchive shorcut/tutorial/xword.tar.gz
     cd xword; make  (build it)
     cd omniplay/test
-    ~/omniplay/scripts/easy_launch.sh ~/xword/placer -b ~/xword/board.tofro -w ~/xword/wordlist/newmega.txt -v 25 -m 1 -s  (record this using omniplay)
+    ~/omniplay/scripts/easy_launch.sh ~/xword/placer -b ~/xword/board.tofro -w ~/xword/wordlists/newmega.txt -v 25 -m 1 -s  (record this using omniplay)
 
 Use the recording to generate a slice. 
 
