@@ -48,7 +48,7 @@ To build (and run) the kernel, run the following
     sudo reboot
     
 |***Hong: there are some errors during `./compile`. I have to disable the check of return values to force it compile extra tools. there are more errors during the compilation of extra tools, but it seems these errors do not matter.***|
-|--|
+|:--|
 
 NOTE: The compile script will also build your "test" tools.
 
@@ -108,7 +108,7 @@ Note: Depends on the headers_install step from building the kernel
 ### 3. Pin tool compilation ###
 We use Intel Pin version 2.13
 
-|***Hong: eird, I tried 2.13 but failed (got 2.13 from a friend, as Intel has removed it from the website). But 2.14 works!***|
+|***Hong: weird, I tried 2.13 but failed (got 2.13 from a friend, as Intel has removed it from the website). But 2.14 works!***|
 |:---|
 
 To build:
