@@ -12,9 +12,8 @@
 # Setup #
 ### 1. Kernel setup ###
 
-|Hong|
-|--|
-|First of all, this tool is based on https://github.com/endplay/omniplay, which is designed to work on Ubuntu 12.04 32 bit. So before you try anything, make sure you current system matches the specification. I installed a virtual machine of Ubuntu 12.04 32 bit, and installed linux kenrel 3.5.0.|
+|***Hong: First of all, this tool is based on https://github.com/endplay/omniplay, which is designed to work on Ubuntu 12.04 32 bit. So before you try anything, make sure you current system matches the specification. I installed a virtual machine of Ubuntu 12.04 32 bit, and installed linux kenrel 3.5.0.***|
+|:---|
 
 
 
@@ -31,9 +30,8 @@ NOTE: You may also check out ./setup.sh -h and see if you want any of the additi
 
 ##### *Building the kernel* #####
 
-|Hong|
-|--|
-|(Assume you are in the correct environment now) Copy the config file in /boot to the `linux-lts-quantal-3.5.0` folder, and rename it to `.config`. use `make oldconfig` to adjust the configuration.|
+|***Hong: (Assume you are in the correct environment now) Copy the config file in /boot to the `linux-lts-quantal-3.5.0` folder, and rename it to `.config`. use `make oldconfig` to adjust the configuration.***|
+|:--|
 
 If you're building the kernel on a fresh system, you'll need build dependencies:
 
@@ -49,9 +47,8 @@ To build (and run) the kernel, run the following
     sudo ./compile
     sudo reboot
     
-|Hong|
+|***Hong: there are some errors during `./compile`. I have to disable the check of return values to force it compile extra tools. there are more errors during the compilation of extra tools, but it seems these errors do not matter.***|
 |--|
-|there are some errors during `./compile`. I have to disable the check of return values to force it compile extra tools. there are more errors during the compilation of extra tools, but it seems these errors do not matter.|
 
 NOTE: The compile script will also build your "test" tools.
 
@@ -111,9 +108,8 @@ Note: Depends on the headers_install step from building the kernel
 ### 3. Pin tool compilation ###
 We use Intel Pin version 2.13
 
-|Hong|
-|--|
-|Weird, I tried 2.13 but failed (got 2.13 from a friend, as Intel has removed it from the website). But 2.14 works!|
+|***Hong: eird, I tried 2.13 but failed (got 2.13 from a friend, as Intel has removed it from the website). But 2.14 works!***|
+|:---|
 
 To build:
 
@@ -132,7 +128,8 @@ to be:
 
     kernel.yama.ptrace_scope = 0
     
-**[HH]** Not sure changing the file above will have immediately effect on the system. Instead, I updated `/proc/sys/kernel/yama/ptrace_scope`
+|***Hong: Not sure changing the file above will have immediately effect on the system. Instead, I updated `/proc/sys/kernel/yama/ptrace_scope`***|
+|:--|
 
 
 # Basics #
@@ -166,9 +163,8 @@ You can replay a given group with id <id> as follows:
 
 	$ ./resume /replay_logdir/rec_<id> --pthread <omniplay>/src/omniplay/eglibc-2.15/prefix/lib
 	
-|Hong|
+|***Hong: remember to use `--pthread`, not `-pthread`***|
 |--|
-|remember to use `--pthread`, not `-pthread`|
 
 Keep in mind that a recording process can not initiate a replay.  So, do this from some shell other than the recording bash shell that you started above.  Also, a recording must finish in order for you to replay it successfully.
 
