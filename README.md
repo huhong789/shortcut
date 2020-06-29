@@ -186,6 +186,12 @@ Here we use the xword benchmark mentioned in the paper, as this benchmark takes 
 
 Use the recording to generate a slice. 
 
+|***Hong:***|
+|:---|
+|<replay_dir #> is the log folder name|
+|<ckpt #> to get this number, you need to use `shortcut/test/parseulog` to parse the `ulog.pid.xxxx` file|
+|<pid> this is the pid, which is the xxxx of file name `ulog.pid.xxxx`|
+
 	./gen_ckpt.py <replay_dir #> <ckpt #> -taint_byterange <pid>,90,5,250  (the last arguments specifies that an input could change and in this case the changed input comes from the board file)
 	
 Here the ckpt # specifies the end of the code region. In this case, it is a record/replay clock used internally in Arnold. Here we could use the last gettimeofday system call in the replay log (this is 3043 on my recording - your milage may vary). 
