@@ -197,7 +197,10 @@ Use the recording to generate a slice.
 
 	./gen_ckpt.py <replay_dir #> <ckpt #> -taint_byterange <pid>,90,5,250  (the last arguments specifies that an input could change and in this case the changed input comes from the board file)
 	
-Here the ckpt # specifies the end of the code region. In this case, it is a record/replay clock used internally in Arnold. Here we could use the last gettimeofday system call in the replay log (this is 3043 on my recording - your milage may vary). 
+Here the ckpt # specifies the end of the code region. In this case, it is a record/replay clock used internally in Arnold. Here we could use the last gettimeofday system call in the replay log (this is 3043 on my recording - your milage may vary).
+
+|***Hong: OK, the following is confusing. Here is my guess. Replace the `@` in the SECOND row at the 6th and 11th columns with `_`. The file represents a board, where `@` represents a sequare and `_` represents a black slot, etc. This can be inffered by diffing `board.tofro` and `board.tofro.replay`.***|
+|:--|
 	
 Now change the file ~/xword/board.tofro and save it:
 
