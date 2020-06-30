@@ -199,7 +199,7 @@ Use the recording to generate a slice.
 	
 Here the ckpt # specifies the end of the code region. In this case, it is a record/replay clock used internally in Arnold. Here we could use the last gettimeofday system call in the replay log (this is 3043 on my recording - your milage may vary).
 
-|***Hong: OK, the following is confusing. Here is my guess. Replace the `@` in the SECOND row at the 6th and 11th columns with `_`. The file represents a board, where `@` represents a sequare and `_` represents a black slot, etc. This can be inffered by diffing `board.tofro` and `board.tofro.replay`.***|
+|***Hong: OK, the following is confusing. Here is my guess. Replace the `@` in the SECOND row at the 6th and 11th columns with `_`. The file represents a board, where `@` represents a square and `_` represents a blank slot, etc. This can be inffered by diffing `board.tofro` and `board.tofro.replay`.***|
 |:--|
 	
 Now change the file ~/xword/board.tofro and save it:
@@ -211,6 +211,10 @@ Now replay the execution:
 First, make sure sdaemon is running. The sdaemon is required for transparent recovery:
 
 	 ./sdaemon &
+
+|***Hong: the <ckpt #> is the checkpoint number you used in `gen_ckpt.py`***|
+|:---|
+|***And the execution crashes ....***|
 
 Then, do the replay with go-live. This is the our first trial to accelerate the program:
 
